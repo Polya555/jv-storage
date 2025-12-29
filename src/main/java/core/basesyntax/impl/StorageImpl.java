@@ -11,10 +11,12 @@ public class StorageImpl<K, V> implements Storage<K, V> {
     public StorageImpl() {
         this.keys = (K[]) new Object[MAX_SIZE];
         this.values = (V[]) new Object[MAX_SIZE];
+        this.size = 0; // Явна ініціалізація згідно з чек-листом
     }
 
     private int findKeyIndex(K key) {
         for (int i = 0; i < size; i++) {
+            // Ручна перевірка на null без використання Objects.equals()
             if (key == keys[i] || (key != null && key.equals(keys[i]))) {
                 return i;
             }
